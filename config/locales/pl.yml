@@ -1,0 +1,34 @@
+pl:
+  label_testers: 'Nowe zgłoszenie'
+  label_testers_manage: 'Zarządzaj zgłoszeniami'
+  label_my: Moje
+  label_persons:
+    pm: Projekt menadżer
+    backend: Backend developer
+    frontend: Frontend developer
+  label_testers_details:
+    documentation: Dokumentacja
+    owncloud: Owncloud
+    test_environment: Środowisko testowe
+    login_test: Login
+    password_test: Hasło
+  label_devices:
+    desktop: Desktop
+    mobile: Telefon
+    tablet: Tablet
+    other: Inne
+    info: Dodatkowe urządzenia
+  label_statuses:
+    new: Nowy
+    in_progress: W trakcie
+    resolved: Rozwiązany
+    closed: Zamknięty
+    on_hold: Wstrzymany
+    wrong: Błędny
+  label_section_reponsible_persons: Osoby odpowiedzialne
+  label_section_details: Szczegóły
+  label_section_devices: Urządzenia
+  label_added_by: Dodany przez
+  label_value_1: 'Tak'
+  subject_new_order: 'Utworzono nowe zgłoszenie.'
+  content_new_order: "%{project} został zgłoszony do testsów, numer zgłoszenia #%{identifier}. Więcej informacji na : %{page}"

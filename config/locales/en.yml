@@ -1,0 +1,34 @@
+en:
+  label_testers: 'New request'
+  label_testers_manage: 'Manage requests'
+  label_my: My
+  label_persons:
+    pm: Project menager
+    backend: Backend developer
+    frontend: Frontend developer
+  label_testers_details:
+    documentation: Documentation
+    owncloud: Owncloud
+    test_environment: Test environment
+    login_test: Login
+    password_test: Password
+  label_devices:
+    desktop: Desktop
+    mobile: Mobile
+    tablet: Tablet
+    other: Other
+    info: Additional devices
+  label_statuses:
+    new: New
+    in_progress: In progress
+    resolved: Resolved
+    closed: Closed
+    on_hold: On hold
+    wrong: Wrong
+  label_section_reponsible_persons: Responsible persons
+  label_section_details: Details
+  label_section_devices: Devices
+  label_added_by: Added by
+  label_value_1: 'Yes'
+  subject_new_order: 'You receive a new request'
+  content_new_order: "%{project} has been requested to test, identifier #%{identifier}. For more information please visit : %{page}"

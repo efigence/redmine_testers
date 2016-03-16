@@ -1,0 +1,128 @@
+<div class="flash error" id="flash_error" style='display: none;'>Pola zaznaczone na czerwono są wymagane.</div>
+<%= form_for 'testers', html: {id: 'tester-form'}, url: url_for(controller: 'testers', action: 'create') do |f| %>
+  <div class="form-group row">
+    <label for="select-project" class="col-sm-2 control-label">Projekt</label>
+    <div class="col-sm-8">
+      <%= f.select :project_id, options_from_collection_for_select(User.current.projects.where(status: Project::STATUS_ACTIVE), 'id', 'name', @p.try(:id)), { include_blank: true }, class: "selectize", id: 'select-project' %>
+    </div>
+  </div>
+  <hr>
+  <% if @p %>
+    <div class="form-group row">
+      <label for="project-priority" class="col-sm-2 control-label">Priorytet</label>
+      <div class="col-sm-1">
+        <%= f.select :priority, Order::PRIORITIES.map{|priority| [ priority[1], priority[0] ]}, selected: 2, id: 'project-priority', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="project-duration" class="col-sm-2 control-label">Czas przeznaczony na testy(liczba dni)</label>
+      <div class="col-sm-1">
+        <%= f.number_field :project_duration_time, id: 'project-duration', class: 'form-control required', min: 1 %>
+      </div>
+    </div>
+
+    <!-- persons -->
+
+    <div class="form-group row">
+      <label for="pm-id" class="col-sm-2 control-label">Osoba kierująca projektem</label>
+      <div class="col-sm-8">
+        <%= f.select '[persons][pm]', options_from_collection_for_select(@p.users, 'name', 'name'), { include_blank: true }, class: 'selectize required', id: 'pm-id' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="pm-id" class="col-sm-2 control-label">Osoba odpowiedzialna za Front-end</label>
+      <div class="col-sm-8">
+        <%= f.select '[persons][frontend]', options_from_collection_for_select(@p.users, 'name', 'name'), { include_blank: true }, class: 'selectize required', id: 'fe-id' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="pm-id" class="col-sm-2 control-label">Osoba odpowiedzialna za Back-end</label>
+      <div class="col-sm-8">
+      <%= f.select '[persons][backend]', options_from_collection_for_select(@p.users, 'name', 'name'), { include_blank: true }, class: 'selectize required', id: 'be-id' %>
+      </div>
+    </div>
+
+    <!-- details -->
+
+    <div class="form-group row">
+      <label for="project-documentation" class="col-sm-2 control-label">Link do pobrania dokumentacji/specyfikacji projektu</label>
+      <div class="col-sm-8">
+        <%= f.text_field '[details][documentation]', id: 'project-documentation', class: 'form-control', autocomplete: 'off' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="project-owncloud" class="col-sm-2 control-label">Link do ownCloud z grafikami do projektu</label>
+      <div class="col-sm-8">
+        <%= f.text_field '[details][owncloud]', id: 'project-owncloud', class: 'form-control', autocomplete: 'off' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="project-test_environment" class="col-sm-2 control-label">Link do środowiska testowego:</label>
+      <div class="col-sm-8">
+        <%= f.text_field '[details][test_environment]', id: 'project-test_environment', class: 'form-control required', autocomplete: 'off' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="project-login_test" class="col-sm-2 control-label">Login do danego środowiska testowego</label>
+      <div class="col-sm-8">
+        <%= f.text_field '[details][login_test]', id: 'project-login_test', class: 'form-control', autocomplete: 'off' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="project-password_test" class="col-sm-2 control-label">Hasło do danego środowiska testowego:</label>
+      <div class="col-sm-8">
+        <%= f.text_field '[details][password_test]', id: 'project-password_test', class: 'form-control', autocomplete: 'off' %>
+      </div>
+    </div>
+
+    <!-- test ranges -->
+
+    <div class="form-group row ">
+      <label for='devices'class="col-sm-2 control-label">Zakres testów</label>
+      <em class='info'>Wybierz co najmniej jedno urządzenie.</em>
+      <div class="checkbox col-sm-8" id='devices'>
+        <label>
+          <%= f.check_box '[devices][desktop]', value: true, class: 'required' %>
+          Desktop
+        </label><br/>
+        <label>
+        <%= f.check_box '[devices][mobile]', value: true, class: 'required' %>
+        Mobile
+        </label><br/>
+        <label>
+        <%= f.check_box '[devices][tablet]', value: true, class: 'required' %>
+        Tablet
+        </label><br/>
+        <label>
+        <%= f.check_box '[devices][other]', value: true, class: 'required', id: 'other-device' %>
+        Inne
+        <%= f.text_field '[devices][info]', id: 'other-device-info', disabled: true, autocomplete: 'off' %>
+        </label>
+      </div>
+    </div>
+
+    <!-- Additional information -->
+
+    <div class="form-group row">
+      <label for="project-workflow" class="col-sm-2 control-label">Krótki opis jak ma wyglądać workflow ticket-ów ?</label>
+      <div class="col-sm-8">
+        <%= f.text_field :workflow, id: 'project-workflow', class: 'form-control', autocomplete: 'off' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="project-additional_nfo" class="col-sm-2 control-label">Dodatkowe informacje dla testerów</label>
+      <div class="col-sm-8">
+        <%= f.text_field :additional_information, id: 'project-additional_nfo', class: 'form-control required', autocomplete: 'off' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<% if @p %>
+  <div class="form-group row">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button class="btn btn-secondary" id='save-for-testers'>Zgłoś</button>
+    </div>
+  </div>
+<% end %>

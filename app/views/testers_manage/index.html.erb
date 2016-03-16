@@ -1,0 +1,52 @@
+<%= link_to l(:label_my), testers_panel_path(my: 'y'), class: "btn btn-default btn-sm" %>
+<%= link_to l(:label_all), testers_panel_path, class: "btn btn-default btn-sm"  %>
+<hr>
+<% if @orders.any? %>
+  <div>
+    <div class="splitcontentleft">
+      <div class="panel panel-default">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th><%= l(:field_priority)%></th>
+              <th><%= l(:field_project)%></th>
+              <th><%= l(:label_comment)%></th>
+              <th><%= l(:field_assigned_to)%></th>
+              <th><%= l(:field_estimated_hours)%></th>
+              <th>Data dodania</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr id="order" class='tr-order' data-path="<%= testers_manage_path(order)%>">
+                <td class="id">#<%= order.id %><em class="status-<%= order.id %>"><%= "(#{Order::STATUSES[order.status]})" %></em></td>
+                <td class="priority-<%= order.id %>"><%= Order::PRIORITIES[order.priority] %></td>
+                <td class="project"><%= order.project.name.try(:truncate, 40) %></td>
+                <td class="comment-<%= order.id %>" title="<%= order.comment %>"><%= order.comment.try(:truncate, 20) %></td>
+                <td class="assigned_to-<%= order.id %>"><%= order.user.try(:name) %></td>
+                <td class="estimated_time-<%= order.id %>"><%= order.estimated_time %></td>
+                <td class='created-at'><%= order.created_at.strftime('%d-%m-%Y') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <%= will_paginate @orders %>
+    </div>
+
+    <div class="splitcontentright">
+      <!-- js content _show -->
+    </div>
+
+  </div>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'bootstrap', :plugin => 'redmine_testers' %>
+  <%= stylesheet_link_tag 'testers', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'testers_manage', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'bootstrap', :plugin => 'redmine_testers' %>
+<% end %>

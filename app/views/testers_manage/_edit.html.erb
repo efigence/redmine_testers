@@ -1,0 +1,48 @@
+<%= form_for 'testers', remote: true, html: {id: 'tester-edit-form'}, url: url_for(controller: 'testers_manage', action: 'update') do |f| %>
+  <% if User.current.allowed_to_edit_request? %>
+    <div class="form-group row">
+      <label for="select-priority" class="col-sm-2 control-label"><%= l(:field_priority) %></label>
+      <div class="col-sm-8">
+        <%= f.select :priority, options_for_select(Order::PRIORITIES.map{|priority| [ priority[1], priority[0] ]}, @order.priority), class: 'form-control order-priority col-sm-3', id: 'select-priority' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="select-assigend" class="col-sm-2 control-label"><%= l(:field_assigned_to) %></label>
+      <div class="col-sm-8">
+        <%= f.select :assigned_to, options_from_collection_for_select(Group.where(lastname: 'Testers').first.users, 'id', 'name', @order.assigned_to), { include_blank: true }, class: 'form-control order-assigend-to col-sm-5', id: "select-assigend" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="field-comment" class="col-sm-2 control-label"><%= l(:label_comment) %></label>
+      <div class="col-sm-8">
+        <%= f.text_field :comment, value: @order.comment, class: 'form-control order-comment', id: 'field-comment', autocomplete: 'off' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if User.current.allowed_to_edit_request? || User.current.id == @order.assigned_to %>
+    <div class="form-group row">
+      <label for="select-order-status" class="col-sm-2 control-label"><%= l(:field_status) %></label>
+      <div class="col-sm-8">
+        <%= f.select :status, options_for_select(Order::STATUSES.map{|status| [ status[1], status[0] ]}, @order.status), class: 'form-control order-priority col-sm-3', id: 'select-order-status' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="field-estimated-time" class="col-sm-2 control-label"><%= l(:field_estimated_hours) %></label>
+      <div class="col-sm-2">
+        <%= f.text_field :estimated_time, value: @order.estimated_time, class: 'form-control order-estimated-time col-sm-3', id: "field-estimated-time", type: 'number', step: 0.1 %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<hr>
+<div class="form-group row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <button class="btn btn-secondary" id='save-order'><%= l(:button_save) %></button>
+    <button class="btn btn-secondary" id='cancel-order'><%= l(:button_cancel) %></button>
+    <% if User.current.allowed_to_edit_request? %>
+      <%= link_to l(:button_delete), destroy_order_path(@order), class: 'btn btn-secondary', data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+</div>

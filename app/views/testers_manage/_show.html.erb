@@ -1,0 +1,65 @@
+<div class="showOrder">
+    <% if @flash %>
+      <div class="flash <%= @flash[:type] %>" id="flash_order"><%= @flash[:msg] %></div>
+    <% end %>
+    <% cache "testers/order/#{@order.id}-#{@order.priority}/#{User.current.id}/#{@order.updated_at}" do %>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="row vertical-center">
+                <div class="col-sm-6">
+                    <h3>#<%= @order.id%></h3>
+                    <%= authoring(@order.created_at, User.find(@order.created_by)) %>
+                </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class='testers-persons'>
+              <h4><%= I18n.t("label_section_reponsible_persons") %></h4>
+              <% @order.persons.each do |k,v| %>
+                <b><%= I18n.t("label_persons.#{k}") %></b><%= ": #{v}" %><br>
+              <% end %>
+            </div>
+            <div class='testers-details'>
+              <h4><%= I18n.t("label_section_details") %></h4>
+              <% @order.details.each do |k,v| %>
+                <% if v != "" %>
+                  <b><%= I18n.t("label_testers_details.#{k}") %></b><%= ": #{v}" %><br>
+                <% end %>
+              <% end %>
+            </div>
+            <div class='testers-devices'>
+              <h4><%= I18n.t("label_section_devices") %></h4>
+              <% @order.devices.each do |k,v| %>
+                <% if k == 'other' && v != "0" %>
+                  <b><%= I18n.t("label_devices.#{k}") %></b> <%= I18n.t("label_value_#{v}") + " (#{@order.devices['info']})" %><br>
+                <% elsif v != "0" && k != 'info' %>
+                  <b><%= I18n.t("label_devices.#{k}") %></b> <%= I18n.t("label_value_#{v}") %><br>
+                <% end %>
+              <% end %>
+            </div>
+
+            <% if User.current.allowed_to?(:view_issues, @project) %>
+              <div class='testers-bugs'>
+                <h4><%=l(:label_issue_tracking)%></h4>
+                <% tracker = Tracker.first %>
+                <%= link_to h(tracker.name), project_issues_path(@project, :set_filter => 1, :tracker_id => tracker.id) %>:
+                    <%= l(:label_x_open_issues_abbr_on_total, :count => @project.issues.visible.open.where(tracker_id: 1).count,
+                                                              :total => @project.issues.visible.where(tracker_id: 1).count) %>
+              </div>
+            <% end %>
+          </div>
+          <% if User.current.allowed_to_edit_request? || User.current.id == @order.assigned_to %>
+            <div class="panel-footer">
+              <div class='testers-manage-order'>
+                <h4>Zarządzaj zgłoszeniem</h4>
+                  <div id='panel-edit'>
+                    <button class="btn btn-secondary" id='edit-order' data-path="<%= edit_order_path(@order) %>">Edytuj</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
+<% end %>
+

@@ -1,0 +1,11 @@
+<h3>Zgłoś projekt do testów</h3>
+<hr>
+<%= render partial: 'form' %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'bootstrap', :plugin => 'redmine_testers' %>
+  <%= stylesheet_link_tag 'selectize', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'bootstrap', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'selectize', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'testers', :plugin => 'redmine_testers' %>
+<% end %>
