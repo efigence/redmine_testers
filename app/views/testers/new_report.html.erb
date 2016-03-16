@@ -1,0 +1,12 @@
+<%= link_to l(:label_link_back), testers_path, class: 'btn btn-xs btn-info pull-right' %>
+<h3><%= l(:label_project_for_tests) %></h3>
+<hr>
+<%= render partial: 'form' %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'bootstrap', :plugin => 'redmine_testers' %>
+  <%= stylesheet_link_tag 'selectize', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'bootstrap', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'selectize', :plugin => 'redmine_testers' %>
+  <%= javascript_include_tag 'testers', :plugin => 'redmine_testers' %>
+<% end %>

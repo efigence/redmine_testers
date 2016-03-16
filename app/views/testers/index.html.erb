@@ -1,11 +1,11 @@
-<h3>Zgłoś projekt do testów</h3>
-<hr>
-<%= render partial: 'form' %>
+<% if User.current.admin? || User.current.has_access_to_redmine_testers?('senders') %>
+  <%= link_to l(:label_create_new_order), testers_new_report_path, class: 'btn btn-primary' %>
+  <%= link_to l(:label_list_of_orders), test_list_path, class: 'btn btn-primary' %>
+<% end %>
+<% if User.current.admin? || User.current.has_access_to_redmine_testers?('managers') %>
+  <%= link_to l(:label_manage_orders), testers_panel_path, class: 'btn btn-primary' %>
+<% end %>
 
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'bootstrap', :plugin => 'redmine_testers' %>
-  <%= stylesheet_link_tag 'selectize', :plugin => 'redmine_testers' %>
-  <%= javascript_include_tag 'bootstrap', :plugin => 'redmine_testers' %>
-  <%= javascript_include_tag 'selectize', :plugin => 'redmine_testers' %>
-  <%= javascript_include_tag 'testers', :plugin => 'redmine_testers' %>
 <% end %>

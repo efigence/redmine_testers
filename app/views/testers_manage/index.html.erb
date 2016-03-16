@@ -1,3 +1,4 @@
+<%= link_to l(:label_link_back), testers_path, class: 'btn btn-xs btn-info pull-right' %>
 <%= link_to l(:label_my), testers_panel_path(my: 'y'), class: "btn btn-default btn-sm" %>
 <%= link_to l(:label_all), testers_panel_path, class: "btn btn-default btn-sm"  %>
 <hr>
@@ -9,12 +10,12 @@
           <thead>
             <tr>
               <th>#</th>
-              <th><%= l(:field_priority)%></th>
-              <th><%= l(:field_project)%></th>
-              <th><%= l(:label_comment)%></th>
-              <th><%= l(:field_assigned_to)%></th>
-              <th><%= l(:field_estimated_hours)%></th>
-              <th>Data dodania</th>
+              <th><%= l(:field_priority) %></th>
+              <th><%= l(:field_project) %></th>
+              <th><%= l(:label_comment) %></th>
+              <th><%= l(:field_assigned_to) %></th>
+              <th><%= l(:field_estimated_hours) %></th>
+              <th><%= l(:label_tab_added_on) %></th>
             </tr>
           </thead>
           <tbody>

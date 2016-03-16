@@ -1,10 +1,26 @@
 class TestersController < ApplicationController
   unloadable
   before_filter :check_access
-  before_filter :get_project, only: [:index]
+  before_filter :get_project, only: [:new_report]
 
   def index
+  end
+
+  def new_report
     cookies.delete :project_id
+  end
+
+  def test_list
+    if params[:filter_status].blank?
+      @orders = Order.eager_load(:project, :user).paginate(per_page: 15, page: params[:page])
+    else
+      @orders = Order.eager_load(:project, :user).where(status: params[:filter_status].to_i).paginate(per_page: 15, page: params[:page])
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -22,7 +38,7 @@ class TestersController < ApplicationController
   private
 
   def get_project
-    @p = Project.find(cookies["project_id"]) if !cookies["project_id"].blank?
+    @p = Project.find(cookies["project_id"]) unless cookies["project_id"].blank?
   end
 
   def check_access

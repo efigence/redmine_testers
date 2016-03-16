@@ -21,6 +21,7 @@
   <% end %>
 
   <% if User.current.allowed_to_edit_request? || User.current.id == @order.assigned_to %>
+
     <div class="form-group row">
       <label for="select-order-status" class="col-sm-2 control-label"><%= l(:field_status) %></label>
       <div class="col-sm-8">

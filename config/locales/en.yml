@@ -1,4 +1,5 @@
 en:
+  label_main_testers: 'Testers'
   label_testers: 'New request'
   label_testers_manage: 'Manage requests'
   label_my: My
@@ -32,3 +33,36 @@ en:
   label_value_1: 'Yes'
   subject_new_order: 'You receive a new request'
   content_new_order: "%{project} has been requested to test, identifier #%{identifier}. For more information please visit : %{page}"
+
+  label_settings_allowed: Groups allowed to Testers tab
+  label_settings_managers: Groups allowed to manage orders
+  label_settings_sender: Groups allowed to create orders
+  label_settings_notifiers: Notify of new orders
+  label_settings_editors: Admins of orders
+  label_manage_order: Manage order
+  label_tab_project: Project
+  label_tab_estimated_time: Estimated time
+  label_tab_bugs_count: Bugs count
+  label_project_for_tests: Report project for tests
+  label_create_new_order: Create order
+  label_list_of_orders: List of tested projects
+  label_manage_orders: Manage orders
+  label_link_back: Back
+  label_tab_added_on: Added on
+
+  label_form_priority: Priorytet
+  label_form_time_for_tests: Time for tests (in days)
+  label_form_person_in_charge: Person in charge of the project
+  label_form_frontend: Person in charge of Front-end
+  label_form_backend: Person in charge of Back-end
+  label_form_link_to_specs: Link to documentation/specification of the project
+  label_form_link_to_owncloud: Link to ownCloud with layouts
+  label_form_link_to_test_env: Link to test environment
+  label_form_login_to_test_env: Login to test environment
+  label_form_password_to_test_env: Password to test environment
+  label_form_scopes_of_testing: Test scope
+  label_form_short_workflow: Short description of tickets workflow
+  label_form_additional_info: Additional information for testers
+  label_form_zglos: Report for tests
+  label_form_choose_one: Choose at least one device.
+  label_form_other_type: Other

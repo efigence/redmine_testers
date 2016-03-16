@@ -1,0 +1,13 @@
+<% @orders.each.with_index do |order, index| %>
+  <tr>
+    <td><%= index + 1 %></td>
+    <td><%= link_to order.project.name, order.project %></td>
+    <td><%= Order::STATUSES[order.status] %></td>
+    <td><%= order.persons[:pm] %></td>
+    <td><%= order.persons[:frontend] %></td>
+    <td><%= order.persons[:backend] %></td>
+    <td><%= order.estimated_time %></td>
+    <td><%= order.project.issues.visible.open.where(tracker_id: 1).count.to_s + ' / '
+          + order.project.issues.visible.where(tracker_id: 1).count.to_s %></td>
+  </tr>
+<% end %>

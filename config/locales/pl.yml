@@ -1,4 +1,5 @@
 pl:
+  label_main_testers: 'Testers'
   label_testers: 'Nowe zgłoszenie'
   label_testers_manage: 'Zarządzaj zgłoszeniami'
   label_my: Moje
@@ -32,3 +33,36 @@ pl:
   label_value_1: 'Tak'
   subject_new_order: 'Utworzono nowe zgłoszenie.'
   content_new_order: "%{project} został zgłoszony do testsów, numer zgłoszenia #%{identifier}. Więcej informacji na : %{page}"
+
+  label_settings_allowed: Grupy uprawnione do dostępu do zakładki Testers
+  label_settings_managers: Grupy uprawnione do zarządzania zgłoszeniami
+  label_settings_sender: Grupy uprawnione do wysyłania zgłoszeń
+  label_settings_notifiers: Powiadom, gdy pojawi się nowe zgłoszenie
+  label_settings_editors: Osoby uprawnione do zarządzania zgłoszenia
+  label_manage_order: Zarządzaj zgłoszeniem
+  label_tab_project: Projekt
+  label_tab_estimated_time: Estymowany czas
+  label_tab_bugs_count: Liczba bugów
+  label_project_for_tests: Zgłoś projekt do testów
+  label_create_new_order: Wyślij zgłoszenie
+  label_list_of_orders: Lista testowanych
+  label_manage_orders: Zarządzaj zgłoszeniami
+  label_link_back: Powrót
+  label_tab_added_on: Data dodania
+
+  label_form_priority: Priorytet
+  label_form_time_for_tests: Czas przeznaczony na testy(liczba dni)
+  label_form_person_in_charge: Osoba kierująca projektem
+  label_form_frontend: Osoba odpowiedzialna za Front-end
+  label_form_backend: Osoba odpowiedzialna za Back-end
+  label_form_link_to_specs: Link do pobrania dokumentacji/specyfikacji projektu
+  label_form_link_to_owncloud: Link do ownCloud z grafikami do projektu
+  label_form_link_to_test_env: Link do środowiska testowego
+  label_form_login_to_test_env: Login do danego środowiska testowego
+  label_form_password_to_test_env: Hasło do danego środowiska testowego
+  label_form_scopes_of_testing: Zakres testów
+  label_form_short_workflow: Krótki opis jak ma wyglądać workflow ticket-ów ?
+  label_form_additional_info: Dodatkowe informacje dla testerów
+  label_form_zglos: Zgłoś do testów
+  label_form_choose_one: Wybierz co najmniej jedno urządzenie.
+  label_form_other_type: Inne

@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   serialize :persons, Hash
   serialize :details, Hash
   serialize :devices, Hash
-  
+
   after_create :notify_subscribers
 
   PRIORITIES = {
@@ -28,8 +28,9 @@ class Order < ActiveRecord::Base
   private
 
   def notify_subscribers
-    subscribers = User.find(Setting.plugin_redmine_testers['notifiers'])
-    if subscribers.any?
+    notifiers = Setting.plugin_redmine_testers['notifiers']
+    unless notifiers.nil? || notifiers == []
+      subscribers = User.find(notifiers)
       subscribers.each { |s| send_notification(s) }
     end
   end

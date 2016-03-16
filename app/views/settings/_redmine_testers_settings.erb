@@ -1,28 +1,35 @@
 <%= stylesheet_link_tag '/plugin_assets/redmine_hamster/stylesheets/selectize.default.css' %>
 <%= javascript_include_tag '/plugin_assets/redmine_hamster/javascripts/selectize' %>
 <p>
-  <label>Grupy uprawnione do zarządzania zgłoszeniami</label>
+  <label><%= l(:label_settings_allowed) %></label>
+    <%= select_tag "settings[allowed_to_testers][]",
+      options_from_collection_for_select(Group.all.sort, 'id', 'lastname', @settings['allowed_to_testers']
+        ), :multiple => true, class: "selectize" %>
+
+</p>
+<p>
+  <label><%= l(:label_settings_managers) %></label>
     <%= select_tag "settings[managers][]",
       options_from_collection_for_select(Group.all.sort, 'id', 'lastname', @settings['managers']
         ), :multiple => true, class: "selectize" %>
 
 </p>
 <p>
-  <label>Grupy uprawnione do wysyłania zgłoszeń</label>
+  <label><%= l(:label_settings_sender) %></label>
     <%= select_tag "settings[senders][]",
       options_from_collection_for_select(Group.all.sort, 'id', 'lastname', @settings['senders']
         ), :multiple => true, class: "selectize" %>
 
 </p>
 <p>
-  <label>Powiadom, gdy pojawi się nowe zgłoszenie: </label>
+  <label><%= l(:label_settings_notifiers) %></label>
     <%= select_tag "settings[notifiers][]",
       options_from_collection_for_select(User.active, 'id', 'name', @settings['notifiers']
         ), :multiple => true, class: "selectize" %>
 
 </p>
 <p>
-  <label>Osoby uprawnione do zarządzania zgłoszenia</label>
+  <label><%= l(:label_settings_editors) %></label>
     <%= select_tag "settings[editors][]",
       options_from_collection_for_select(User.active, 'id', 'name', @settings['editors']
         ), :multiple => true, class: "selectize" %>

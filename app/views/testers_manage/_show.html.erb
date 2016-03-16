@@ -51,7 +51,7 @@
           <% if User.current.allowed_to_edit_request? || User.current.id == @order.assigned_to %>
             <div class="panel-footer">
               <div class='testers-manage-order'>
-                <h4>Zarządzaj zgłoszeniem</h4>
+                <h4><%= l(:label_manage_order) %></h4>
                   <div id='panel-edit'>
                     <button class="btn btn-secondary" id='edit-order' data-path="<%= edit_order_path(@order) %>">Edytuj</button>
                   </div>
@@ -62,4 +62,3 @@
       </div>
   </div>
 <% end %>
-
