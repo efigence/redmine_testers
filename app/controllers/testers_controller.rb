@@ -11,16 +11,16 @@ class TestersController < ApplicationController
   end
 
   def test_list
+    @orders = Order.eager_load(:project, :user).paginate(per_page: 15, page: params[:page])
+  end
+
+  def test_list_partial
     if params[:filter_status].blank?
       @orders = Order.eager_load(:project, :user).paginate(per_page: 15, page: params[:page])
     else
       @orders = Order.eager_load(:project, :user).where(status: params[:filter_status].to_i).paginate(per_page: 15, page: params[:page])
     end
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    render partial: 'testers/test_list_partial' if request.xhr?
   end
 
   def create

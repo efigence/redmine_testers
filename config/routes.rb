@@ -1,6 +1,7 @@
 # Plugin's routes
 # See: http://guides.rubyonrails.org/routing.html
 
+get 'testers/test_list_partial', to: 'testers#test_list_partial'
 get 'testers', to: 'testers#index'
 get 'testers/new_report', to: 'testers#new_report', as: 'testers_new_report'
 get 'testers/test_list', to: 'testers#test_list', as: 'test_list'
